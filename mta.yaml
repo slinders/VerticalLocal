@@ -1,26 +1,29 @@
+_schema-version: '2.0'
 ID: vertical_local
-_schema-version: '2.1'
 description: vertical_local
 version: 0.0.1
 
 modules:
- - name: Persistence
+
+ - name: vertical_local-Persistence
    type: hdb
 #   parameters:
 #      app-name: vertical_local-Persistence
    path: Persistence
    requires:
-    - name: hdi_vl_persistence
+    - name: vertical_local-container
+      properties: 
+        TARGET_CONTAINER: ~{hdi-container-service}
 
 resources:
- - name: hdi_vl_persistence
+
+ - name: vertical_local-container
    properties:
-      hdi-container-name: ${service-name}
+      hdi-container-service: ${service-name}
 #      hdi-container-name: vertical_local-container
-#   parameters:
-#      config:
-#         schema: vertical_local
-#         database_id: dc3975da-4f63-44dc-8d75-6109c730f20f
+   parameters:
+      config:
+         schema: vertical_local
 #         makeUniqueName: false
 #      service-name: vertical_local-container
    type: com.sap.xs.hdi-container
